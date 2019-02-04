@@ -1,6 +1,6 @@
 package ch03;
 
-import ch01.EchoClientHandler;
+import ch01.EchoServerHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -29,7 +29,7 @@ public class EchoServer {
                     @Override
                     protected void initChannel(SocketChannel socketChannel) throws Exception {
                         ChannelPipeline p = socketChannel.pipeline(); // 채널 파이프라인 객체 생성
-                        p.addLast(new EchoClientHandler()); // 클라이언트의 연결이 생성되었을때 데이터 처리담당 클래스 설정
+                        p.addLast(new EchoServerHandler()); // 클라이언트의 연결이 생성되었을때 데이터 처리담당 클래스 설정
                     }
                 });
 
