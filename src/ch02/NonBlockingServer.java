@@ -28,12 +28,12 @@ public class NonBlockingServer {
                 serverSocketChannel.configureBlocking(false); // 논블로킹 모드로 설정, 기본값은 true(블로킹 모드)
                 serverSocketChannel.bind(new InetSocketAddress(8888)); // 연결 포트 지정
 
-                // serverSocketChannel 객체를 Selector 객체에 등록, Selector 가 가지할 이벤트는 연결요청
+                // serverSocketChannel 객체를 Selector 객체에 등록, Selector 가 감지할 이벤트는 연결요청
                 serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
                 System.out.println("접속 대기중");
 
                 while (true) {
-                    // Selector 에 등록된 채널에서 변경사항이 발생했는지 거사
+                    // Selector 에 등록된 채널에서 변경사항이 발생했는지 검사
                     // Selector 에 아무런 I/O 이벤트도 발생하지 않으면 스레드는 이부분에서 블로킹된다.
                     // 블로킹을 피하고 싶을 경우 selectNow 메서드를 사용
                     selector.select();
@@ -63,7 +63,7 @@ public class NonBlockingServer {
 
            } else {
                 System.out.println("서버 소켓을 생성하지 못했습니다.");
-            }
+           }
 
         } catch (IOException e) {
             System.err.println(e);
